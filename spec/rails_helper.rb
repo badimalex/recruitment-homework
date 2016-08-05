@@ -20,7 +20,9 @@ end
 RSpec.configure do |config|
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
   config.include AcceptanceHelper, type: :feature
+  config.extend ControllerHelper, type: :controller
   config.include FactoryGirl::Syntax::Methods
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
