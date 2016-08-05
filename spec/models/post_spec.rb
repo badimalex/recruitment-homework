@@ -35,9 +35,9 @@ RSpec.describe Post, type: :model do
     it 'should not include other user posts' do
       expect(Post.by_user(@user)).to_not match_array(@other_posts)
     end
+  end
 
-    it 'should return empty if user not specified' do
-
-    end
+  describe '.per_page' do
+    it { expect(Post.per_page).to eq 5 }
   end
 end

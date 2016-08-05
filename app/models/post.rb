@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  self.per_page = 5
+
   scope :latest, -> { order('created_at DESC') }
   scope :by_user, ->(user) { where(user: user) if user }
 

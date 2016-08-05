@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :check_owner, only: [:update, :destroy]
 
   def index
-    @posts = Post.latest
+    @posts = Post.latest.paginate(page: params[:page])
   end
 
   def show
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   end
 
   def my
-    @posts = Post.by_user current_user
+    @posts = Post.by_user(current_user).paginate(page: params[:page])
     render :index
   end
 

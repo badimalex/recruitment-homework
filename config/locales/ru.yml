@@ -146,3 +146,7 @@ ru:
       not_an_integer: не является целым числом
       odd: может иметь лишь четное значение
       record_invalid: 'Возникли ошибки: %{errors}'
+  will_paginate:
+    previous_label: "&#8592; Назад"
+    next_label: "Вперед &#8594;"
+    page_gap: "&hellip;"

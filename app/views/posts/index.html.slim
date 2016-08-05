@@ -8,3 +8,5 @@ table.posts
       td= link_to post.title, post
       td= post.body
       td= post.user.email
+
+= will_paginate @posts
