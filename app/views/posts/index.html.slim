@@ -1,2 +1,10 @@
 - if current_user
-  p = link_to 'Add post', new_post_path
+  p = link_to t('post.my'), posts_my_path
+  p = link_to t('post.add'), new_post_path
+
+table.posts
+  - @posts.each do |post|
+    tr
+      td= link_to post.title, post
+      td= post.body
+      td= post.user.email

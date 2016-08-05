@@ -7,7 +7,7 @@ feature 'Create post' do
     sign_in user
 
     visit posts_path
-    click_on 'Add post'
+    click_on I18n.t('post.add')
 
     fill_in 'Title', with: 'Post title'
     fill_in 'Body', with: 'Post body'
