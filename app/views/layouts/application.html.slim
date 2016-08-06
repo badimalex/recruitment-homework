@@ -6,12 +6,15 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    - if current_user
-      = link_to t('devise.sign_out'), destroy_user_session_path, method: :delete
-    - else
-      = link_to t('devise.sign_in'), new_user_session_path
+    ul.nav
+      li = link_to t('breadcrumbs.root'), root_path
+      - if current_user
+        li = link_to t('post.my'), my_posts_path
+        li = link_to t('post.add'), new_post_path
+        li= link_to t('devise.sign_out'), destroy_user_session_path, method: :delete
+      - else
+        li= link_to t('devise.sign_in'), new_user_session_path
 
     p.notice= notice
     p.alert= alert
-
     = yield

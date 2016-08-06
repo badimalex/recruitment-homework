@@ -153,3 +153,5 @@ ru:
     edit: 'Редактировать'
     delete: 'Удалить'
     submit: 'Сохранить'
+  breadcrumbs:
+    root: 'Главная'

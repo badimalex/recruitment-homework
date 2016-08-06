@@ -1,3 +1,15 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+ul.nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul.nav li {
+  display: inline;
+  margin: 0 12px;
+}
+ul.nav li:first-child {
+  margin: 0;
+}
