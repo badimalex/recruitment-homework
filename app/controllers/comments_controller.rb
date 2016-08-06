@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :load_comment, only: [:update]
+  before_action :load_comment, only: [:update, :destroy]
   before_action :load_post, only: [:create, :update]
-  before_action :check_owner, only: [:update]
+  before_action :check_owner, only: [:update, :destroy]
 
   def create
     @comment = @post.comments.create(comment_params.merge(user: current_user))
@@ -9,6 +9,10 @@ class CommentsController < ApplicationController
 
   def update
     @comment.update(comment_params)
+  end
+
+  def destroy
+    @comment.destroy
   end
 
   private

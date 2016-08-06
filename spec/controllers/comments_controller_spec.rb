@@ -70,6 +70,33 @@ RSpec.describe CommentsController, type: :controller do
         end
       end
     end
+
+    describe 'Delete #destroy' do
+      let(:comment) { create(:comment, post: commentable, user: @user) }
+
+      it 'renders the :destroy template' do
+        delete :destroy, id: comment, post_id: commentable, format: :js
+        expect(response).to render_template :destroy
+      end
+
+      context 'Author deletes own comment' do
+        it 'deletes comment' do
+          comment
+          expect { delete :destroy, id: comment, post_id: commentable, format: :js }.to \
+            change(@user.comments, :count).by(-1)
+        end
+      end
+
+      context 'Author deletes another author comment' do
+        let(:other_user) { create(:user) }
+        let(:other_comment) { create(:comment, user: other_user) }
+
+        it "doesn't deletes the comment" do
+          other_comment
+          expect { delete :destroy, id: other_comment, post_id: commentable }.to_not change(Comment, :count)
+        end
+      end
+    end
   end
 
   describe 'user access' do
@@ -95,6 +122,13 @@ RSpec.describe CommentsController, type: :controller do
 
       it 'redirects to login' do
         patch :update, id: comment, comment: attributes_for(:comment), post_id: commentable
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      it 'redirects to login' do
+        delete :destroy, id: create(:post), post_id: commentable
         expect(response).to redirect_to(new_user_session_path)
       end
     end

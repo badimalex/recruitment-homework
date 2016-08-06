@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature I18n.t('actions.edit') do
+feature 'Post editing' do
   let(:user) { create(:user) }
   let(:post) { create(:post, user: user) }
   let(:another_post) { create(:post, user: create(:user)) }

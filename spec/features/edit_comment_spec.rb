@@ -1,6 +1,6 @@
 require 'acceptance_helper'
 
-feature 'comment editing' do
+feature 'Edit comment' do
   let(:user) { create(:user) }
   let(:post) { create(:post, user: user) }
   let(:comment) { create(:comment, user: user, post: post) }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Paginage posts' do
+feature 'Paginate posts' do
   scenario 'More than 5 posts' do
     create_list :post, 6
     visit posts_path
