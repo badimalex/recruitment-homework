@@ -166,13 +166,14 @@ RSpec.describe PostsController, type: :controller do
       end
     end
 
-    describe 'GET #my' do
+    describe 'GET #index?my=true' do
       let(:posts) { create_list(:post, 2, user: @user) }
       let(:other_posts) { create_list(:post, 2) }
+
       before do
         posts
         other_posts
-        get :my
+        get :index, { my: true }
       end
 
       it 'returns an array of user post' do
@@ -203,9 +204,9 @@ RSpec.describe PostsController, type: :controller do
   describe 'guest access' do
     it_behaves_like 'public access to posts'
 
-    describe 'GET #my' do
+    describe 'GET #index?my=true' do
       it 'redirects to login' do
-        get :my
+        get :index, { my: true }
         expect(response).to redirect_to(new_user_session_path)
       end
     end

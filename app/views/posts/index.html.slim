@@ -1,5 +1,5 @@
 - if current_user
-  p = link_to t('post.my'), posts_my_path
+  p = link_to t('post.my'), posts_path(my: true)
   p = link_to t('post.add'), new_post_path
 
 table.posts
