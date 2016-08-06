@@ -23,8 +23,8 @@ feature 'Post editing' do
     scenario 'try to edit post with invalid data' do
       click_on I18n.t('actions.edit')
 
-      fill_in 'Title', with: nil
-      fill_in 'Body', with: nil
+      fill_in I18n.t('post.title'), with: nil
+      fill_in I18n.t('post.body'), with: nil
       click_on I18n.t('actions.submit')
 
       expect(page).to have_content post.body
@@ -33,9 +33,9 @@ feature 'Post editing' do
 
     scenario 'try to edit post' do
       click_on I18n.t('actions.edit')
-      fill_in 'Title', with: 'Edited post'
-      fill_in 'Body', with: 'My awesome edited body'
-      fill_in 'Created at', with: DateTime.tomorrow.strftime("%Y/%m/%d")
+      fill_in I18n.t('post.title'), with: 'Edited post'
+      fill_in I18n.t('post.body'), with: 'My awesome edited body'
+      fill_in I18n.t('post.created_at'), with: DateTime.tomorrow.strftime("%Y/%m/%d")
 
       click_on I18n.t('actions.submit')
 

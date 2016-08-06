@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
 
   scope :latest, -> { order('created_at DESC') }
   scope :by_user, ->(user) { where(user: user) if user }
+  scope :published, -> { where(published: true) }
 
   belongs_to :user
   has_many :comments, dependent: :destroy

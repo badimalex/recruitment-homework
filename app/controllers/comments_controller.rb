@@ -30,8 +30,6 @@ class CommentsController < ApplicationController
   end
 
   def check_owner
-    unless current_user.author_of?(@comment)
-      redirect_to new_user_session_path
-    end
+    redirect_to new_user_session_path unless current_user.author_of?(@comment)
   end
 end

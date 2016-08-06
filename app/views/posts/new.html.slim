@@ -1,6 +1,8 @@
 = form_for @post do |f|
-  = f.label :title
+  = f.label :title, t('post.title')
   = f.text_field :title
-  = f.label :body
+  = f.label :body, t('post.body')
   = f.text_area :body
-  = f.submit 'Create'
+  = f.label :published, t('post.published')
+  = f.check_box :published
+  = f.submit t('actions.submit')

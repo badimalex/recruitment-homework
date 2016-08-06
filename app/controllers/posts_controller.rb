@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :check_owner, only: [:update, :destroy]
 
   def index
-    @posts = Post.latest.paginate(page: params[:page])
+    @posts = Post.latest.published.paginate(page: params[:page])
   end
 
   def show
@@ -48,12 +48,10 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :published)
   end
 
   def check_owner
-    unless current_user.author_of?(@post)
-      redirect_to @post
-    end
+    redirect_to @post unless current_user.author_of?(@post)
   end
 end
