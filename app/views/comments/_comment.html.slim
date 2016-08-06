@@ -1,2 +1,9 @@
-div
+div { data-comment = comment.id }
   p=comment.body
+  - if comment.persisted?
+    - if current_user and current_user.author_of?(comment)
+      p= link_to t('actions.edit'), '', class: 'edit-comment-link', data: { comment_id: comment.id }
+      = form_for [@post, comment], remote: true, html: {id: "edit-comment-#{comment.id}"} do |f|
+        = f.label :body, t('comment.body')
+        = f.text_area :body
+        = f.submit t('actions.submit')

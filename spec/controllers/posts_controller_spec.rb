@@ -181,7 +181,7 @@ RSpec.describe PostsController, type: :controller do
       end
 
       it 'not include in array other user posts' do
-        expect(assigns(:posts)).to_not match_array(other_posts)
+        expect(assigns(:posts)).to_not include(other_posts)
       end
 
       it 'renders my index' do
@@ -204,7 +204,7 @@ RSpec.describe PostsController, type: :controller do
   describe 'guest access' do
     it_behaves_like 'public access to posts'
 
-    describe 'GET #index?my=true' do
+    describe 'GET #my' do
       it 'redirects to login' do
         get :index, { my: true }
         expect(response).to redirect_to(new_user_session_path)

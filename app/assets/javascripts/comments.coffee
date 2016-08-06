@@ -1,3 +1,6 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  $('body').on 'click', '.edit-comment-link', ->
+    event.preventDefault();
+    $(this).hide();
+    comment_id = $(this).data('comment-id')
+    $('form#edit-comment-' + comment_id).show();

@@ -1,31 +1,73 @@
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
+  let(:commentable) { create(:post) }
+
   shared_examples 'user access to comments' do
     describe 'POST #create' do
-      let(:commentable) { create(:post) }
+      sign_in_user
+      let(:comment) { create(:comment, user: @user) }
 
       context 'with valid attributes' do
         it 'saves the new comment in the database' do
-          expect { post :create, comment: attributes_for(:comment), post_id: commentable }.to \
+          expect { post :create, comment: attributes_for(:comment), post_id: commentable, format: :js }.to \
             change(commentable.comments, :count).by(1)
         end
 
-        it 'redirect to post show' do
-          post :create, comment: attributes_for(:comment), post_id: commentable
-          expect(response).to redirect_to post_path(commentable)
+        it 'render create template' do
+          post :create, comment: attributes_for(:comment), post_id: commentable, format: :js
+          expect(response).to render_template :create
         end
       end
 
       context 'with invalid attributes' do
         it 'does not save the comment' do
-          expect { post :create, comment: attributes_for(:invalid_comment), post_id: commentable }.to_not \
+          expect { post :create, comment: attributes_for(:invalid_comment), post_id: commentable, format: :js  }.to_not \
             change(Comment, :count)
         end
 
-        it 'redirect to post show' do
-          post :create, comment: attributes_for(:invalid_comment), post_id: commentable
-          expect(response).to redirect_to post_path(commentable)
+        it 'render create template' do
+          post :create, comment: attributes_for(:invalid_comment), post_id: commentable, format: :js
+          expect(response).to render_template :create
+        end
+      end
+    end
+
+    describe 'PATCH #update' do
+      let(:comment) { create(:comment, post: commentable, user: @user) }
+
+      it 'assigns the requested comment to @comment' do
+        patch :update, id: comment, comment: attributes_for(:comment), post_id: commentable, format: :js
+        expect(assigns(:comment)).to eq comment
+      end
+
+      it 'assigns the post' do
+        patch :update, id: comment, comment: attributes_for(:comment), post_id: commentable, format: :js
+        expect(assigns(:post)).to eq commentable
+      end
+
+      it 'render update template' do
+        patch :update, id: comment, comment: attributes_for(:comment), post_id: commentable, format: :js
+        expect(response).to render_template :update
+      end
+
+      context 'User update own comment' do
+        it 'updates comment in the database' do
+          patch :update, id: comment, comment: { body: 'new body' }, post_id: commentable, format: :js
+          comment.reload
+          expect(comment.body).to eq 'new body'
+        end
+      end
+
+      context 'User update other user comment' do
+        let(:other_user) { create(:user) }
+        let(:other_comment) { create(:comment, body: 'Old value', user: other_user, post: commentable) }
+
+        it "doesn't updates comment in the database" do
+          other_comment
+          patch :update, id: other_comment, comment: { body: 'New value' }, post_id: commentable, format: :js
+          other_comment.reload
+          expect(assigns(:comment).body).to eq 'Old value'
         end
       end
     end
@@ -44,7 +86,16 @@ RSpec.describe CommentsController, type: :controller do
   describe 'guest access' do
     describe 'POST #create' do
       it 'redirects to login' do
-        post :create, comment: attributes_for(:comment), post_id: create(:post)
+        post :create, comment: attributes_for(:comment), post_id: commentable
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    describe 'PATCH #update' do
+      let(:comment) { create(:comment) }
+
+      it 'redirects to login' do
+        patch :update, id: comment, comment: attributes_for(:comment), post_id: commentable
         expect(response).to redirect_to(new_user_session_path)
       end
     end
