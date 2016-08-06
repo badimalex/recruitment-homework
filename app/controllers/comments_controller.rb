@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
+    @comment.destroy unless @comment.expired?
   end
 
   private

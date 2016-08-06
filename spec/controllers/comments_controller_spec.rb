@@ -87,6 +87,15 @@ RSpec.describe CommentsController, type: :controller do
         end
       end
 
+      context 'When comment is expired' do
+        let(:expired_comment) { create(:comment, post: commentable, user: @user, created_at: DateTime.now + 16.minutes) }
+
+        it "doesn't deletes the comment" do
+          expired_comment
+          expect { delete :destroy, id: expired_comment, post_id: commentable, format: :js }.to_not change(Comment, :count)
+        end
+      end
+
       context 'Author deletes another author comment' do
         let(:other_user) { create(:user) }
         let(:other_comment) { create(:comment, user: other_user) }
