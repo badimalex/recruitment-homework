@@ -165,29 +165,6 @@ RSpec.describe PostsController, type: :controller do
         end
       end
     end
-
-    describe 'GET #index?my=true' do
-      let(:posts) { create_list(:post, 2, user: @user) }
-      let(:other_posts) { create_list(:post, 2) }
-
-      before do
-        posts
-        other_posts
-        get :index, { my: true }
-      end
-
-      it 'returns an array of user post' do
-        expect(assigns(:posts)).to match_array(posts)
-      end
-
-      it 'not include in array other user posts' do
-        expect(assigns(:posts)).to_not include(other_posts)
-      end
-
-      it 'renders my index' do
-        expect(response).to render_template :index
-      end
-    end
   end
 
   describe 'user access' do
@@ -203,13 +180,6 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'guest access' do
     it_behaves_like 'public access to posts'
-
-    describe 'GET #my' do
-      it 'redirects to login' do
-        get :index, { my: true }
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
 
     describe 'GET #new' do
       it 'redirects to login' do

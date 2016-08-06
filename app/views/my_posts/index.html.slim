@@ -1,0 +1,5 @@
+table.posts
+  - @posts.each do |post|
+    tr
+      td= link_to post.title, post
+      td= post.body

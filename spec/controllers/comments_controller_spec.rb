@@ -5,7 +5,6 @@ RSpec.describe CommentsController, type: :controller do
 
   shared_examples 'user access to comments' do
     describe 'POST #create' do
-      sign_in_user
       let(:comment) { create(:comment, user: @user) }
 
       context 'with valid attributes' do

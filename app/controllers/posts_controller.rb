@@ -3,12 +3,9 @@ class PostsController < ApplicationController
 
   before_action :load_post, only: [:show, :edit, :update, :destroy]
   before_action :check_owner, only: [:update, :destroy]
-  before_action :check_auth, only: [:index]
 
   def index
-    @posts = Post.latest
-    @posts = @posts.by_user(current_user) if params[:my]
-    @posts = @posts.paginate(page: params[:page])
+    @posts = Post.latest.paginate(page: params[:page])
   end
 
   def show
@@ -58,9 +55,5 @@ class PostsController < ApplicationController
     unless current_user.author_of?(@post)
       redirect_to @post
     end
-  end
-
-  def check_auth
-    redirect_to new_user_session_path if params[:my] and !current_user
   end
 end
