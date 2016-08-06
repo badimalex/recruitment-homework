@@ -122,9 +122,8 @@ ru:
     created: 'Запись успешно создана'
     removed: 'Запись успешно удалена'
     add: 'Добавить запись'
-    edit: 'Редактировать'
-    delete: 'Удалить'
-    submit: 'Сохранить'
+  comment:
+    body: 'Ваш комментарий'
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -150,3 +149,7 @@ ru:
     previous_label: "&#8592; Назад"
     next_label: "Вперед &#8594;"
     page_gap: "&hellip;"
+  actions:
+    edit: 'Редактировать'
+    delete: 'Удалить'
+    submit: 'Сохранить'

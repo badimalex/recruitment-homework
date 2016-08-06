@@ -1,1 +1,16 @@
-= render @post
+.post
+  = render @post
+
+- if current_user
+  .comment
+    - if @comment.errors.present?
+      puts 234
+      puts @comment.errors
+      - @comment.errors.full_messages.each do |message|
+        = message
+    = form_for [@post, @comment] do |f|
+      = f.label :body, t('comment.body')
+      = f.text_area :body
+      = f.submit t('actions.submit')
+.comments
+  = render @post.comments

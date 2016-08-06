@@ -7,14 +7,14 @@ feature 'Delete post' do
 
   scenario 'Non-authenticated user try to edit post' do
     visit post_path(post)
-    expect(page).to_not have_link I18n.t('post.delete')
+    expect(page).to_not have_link I18n.t('actions.delete')
   end
 
   scenario 'Author deletes own post' do
     sign_in user
 
     visit post_path(post)
-    click_on I18n.t('post.delete')
+    click_on I18n.t('actions.delete')
     expect(page).to have_content I18n.t('post.removed')
     expect(page).to_not have_content(post.title)
     expect(current_path).to eq posts_path
@@ -24,6 +24,6 @@ feature 'Delete post' do
     sign_in user
 
     visit post_path(another_post)
-    expect(page).to_not have_content I18n.t('post.delete')
+    expect(page).to_not have_content I18n.t('actions.delete')
   end
 end

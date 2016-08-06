@@ -1,4 +1,4 @@
-module AcceptanceHelper
+module AcceptanceMacros
   def sign_in(user)
     visit root_path
     click_on I18n.t('devise.sign_in')

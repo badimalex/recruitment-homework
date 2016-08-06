@@ -19,7 +19,7 @@ end
 
 RSpec.configure do |config|
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
-  config.include AcceptanceHelper, type: :feature
+  config.include AcceptanceMacros, type: :feature
   config.extend ControllerHelper, type: :controller
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
