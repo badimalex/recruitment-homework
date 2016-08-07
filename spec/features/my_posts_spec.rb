@@ -37,7 +37,7 @@ feature 'My posts' do
       click_on I18n.t('post.my')
 
       other_posts.each do |post|
-        expect(page).to have_link(post.title)
+        expect(page).to_not have_link(post.title)
       end
     end
   end
