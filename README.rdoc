@@ -1,28 +1,35 @@
-== README
+# Пример блога на Ruby on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![Build Status](https://travis-ci.org/badimalex/recruitment-homework.svg?branch=master)](https://travis-ci.org/badimalex/recruitment-homework)
 
-Things you may want to cover:
+  - В качестве системы аутентификации использован gem devise.
+  - Пользователи могут регистрироваться на проекте, логиниться и делать «выход из проекта». 
+  - Существуют две роли: зарегистрированный пользователь и гость.
+  - Зарегистрированные пользователи могут создавать, редактировать, удалять посты.
+  - Комментировать, редактировать свои комментарии(в течении первых 15 минут после их создания).
+  - Гости могут только просматривать посты и комментарии.
+  - Для тэгов использовался gem act_as_taggable. 
+  - Пользователи могут установить тэги для постов, на главной странице выводится облако тэгов.
 
-* Ruby version
+### Установка
 
-* System dependencies
+ - пример конфигурации бд (config/database.yml.sample)
 
-* Configuration
+```sh
+$ bundle install
+$ rake db:create
+$ rake db:migrate
+$ rails server
+```
 
-* Database creation
+Для заполнения БД фейковыми данными
 
-* Database initialization
+```sh
+$ rake db:populate
+```
 
-* How to run the test suite
+### Запуск тестов
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+```sh
+$ rspec spec/
+```
