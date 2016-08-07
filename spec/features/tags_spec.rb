@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Tags' do
   let(:user) { create(:user) }
   let(:tags) { ['Tag1', 'Tag2', 'Tag3'] }
-  let(:tagged_post) { create(:post, title: 'Tagged post', tag_list: tags.join(', ')) }
+  let(:tagged_post) { create(:post, user: user, title: 'Tagged post', tag_list: tags.join(', ')) }
   let(:not_tagged_post) { create(:post, title: 'Post without tags') }
 
   scenario 'adding' do
@@ -21,6 +21,23 @@ feature 'Tags' do
 
     tags.each do |tag|
       expect(page).to have_link tag
+    end
+  end
+
+  scenario 'editing' do
+    sign_in user
+    tagged_post
+    visit post_path(tagged_post)
+    click_on I18n.t('actions.edit')
+    fill_in I18n.t('post.tag_list'), with: 'New tag'
+
+    click_on I18n.t('actions.submit')
+
+    expect(current_path).to eq post_path(tagged_post)
+    expect(page).to have_link 'New tag'
+
+    tags.each do |tag|
+      expect(page).to_not have_content tag
     end
   end
 
