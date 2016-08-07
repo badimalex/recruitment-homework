@@ -80,6 +80,7 @@ GEM
       railties (>= 3.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    headless (2.2.3)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -216,6 +217,7 @@ DEPENDENCIES
   database_cleaner
   devise
   factory_girl_rails
+  headless
   jbuilder (~> 2.0)
   jquery-rails
   launchy

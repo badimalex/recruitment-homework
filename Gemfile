@@ -39,6 +39,7 @@ gem 'acts-as-taggable-on'
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'headless'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
