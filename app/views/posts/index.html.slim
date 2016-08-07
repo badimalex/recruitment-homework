@@ -3,10 +3,18 @@
     = link_to tag.name, tag_path(tag.name), class: css_class
 
 table.posts
-  - @posts.each do |post|
+  thead
     tr
-      td= link_to post.title, post
-      td= post.body
-      td= post.user.email
+      th = t('post.title')
+      th = t('post.body')
+      th = t('post.user')
+      th = t('post.created_at')
+  tbody
+    - @posts.each do |post|
+      tr
+        td= link_to post.title, post
+        td= post.body
+        td= post.user.email
+        td= post.created_at.strftime("%d.%m.%Y")
 
 = will_paginate @posts
