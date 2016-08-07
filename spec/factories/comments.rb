@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :comment do
-    body "MyText"
+    sequence(:body) { |i| "Comment body #{i}"}
     post
     user
   end
