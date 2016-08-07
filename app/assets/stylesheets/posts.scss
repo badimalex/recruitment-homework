@@ -13,3 +13,25 @@ ul.nav li {
 ul.nav li:first-child {
   margin: 0;
 }
+.new_post label,
+.edit_post label,
+.edit_post input[type=submit],
+.new_comment label,
+.new_comment input[type=submit],
+.new_post input[type=submit]
+{
+  display: block;
+}
+.tag-text {
+  margin-right: 6px;
+}
+#tag_cloud {
+  width: 400px;
+  line-height: 1.6em;
+  .s { font-size: 0.8em; }
+  .m { font-size: 1.2em; }
+  .l { font-size: 1.8em; }
+  .s, .m, .l {
+    margin-right: 6px;
+  }
+}

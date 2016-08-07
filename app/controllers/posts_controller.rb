@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.latest.published.paginate(page: params[:page])
+    @posts = @posts.tagged_with(params[:tag]) if params[:tag]
   end
 
   def show
@@ -48,7 +49,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :published)
+    params.require(:post).permit(:title, :body, :published, :tag_list)
   end
 
   def check_owner

@@ -1,6 +1,6 @@
 h1 = @post.title
 p = @post.body
-
+p= render @post.tags
 - if current_user && current_user.author_of?(@post)
   p = link_to t('actions.edit'), edit_post_path
   p = link_to t('actions.delete'), post_path(@post), method: 'delete'

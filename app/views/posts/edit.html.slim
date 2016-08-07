@@ -3,8 +3,10 @@
   = f.text_field :title
   = f.label :body, t('post.body')
   = f.text_area :body
-  = f.label :published, t('post.published')
-  = f.check_box :published
+  = f.label :tag_list, t('post.tag_list')
+  = f.text_field :tag_list
   = f.label :created_at, t('post.created_at')
   = f.date_field :created_at
+  = f.label :published, t('post.published')
+  = f.check_box :published
   = f.submit t('actions.submit')
