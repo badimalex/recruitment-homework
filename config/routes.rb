@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :my_posts
+  resources :statics
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

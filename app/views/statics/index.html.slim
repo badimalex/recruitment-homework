@@ -1,0 +1,19 @@
+#slideshow
+  .slides
+    div
+      = image_tag 'caucasus-1_762x330.jpg'
+    div
+      = image_tag 'caucasus-2_762x330.jpg'
+    div
+      = image_tag 'caucasus-3_762x330.jpg'
+    div
+      = image_tag 'caucasus-4_762x330.jpg'
+  table.captions
+    tr
+      td.controls
+        span.arrow.arrow-left { data-action = 'prev' }
+        span.arrow.arrow-right { data-action = 'next' }
+      td.text
+        p="Фотографиям вашего ребенка позавидуют даже звезды"
+      td.link
+        =link_to "Начать обучение", "http://google.com"
