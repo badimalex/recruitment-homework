@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :published, :tag_list)
+    params.require(:post).permit(:title, :created_at, :body, :published, :tag_list)
   end
 
   def check_owner
