@@ -1,4 +1,16 @@
+---
 ru:
+  activerecord:
+    attributes:
+      post:
+        title: 'Заголовок'
+        body: 'Содержание'
+    errors:
+      messages:
+        record_invalid: 'Возникли ошибки: %{errors}'
+        restrict_dependent_destroy:
+          has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
+          has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
   date:
     abbr_day_names:
     - Вс
@@ -105,6 +117,11 @@ ru:
         many: "%{count} месяцев"
         one: "%{count} месяц"
         other: "%{count} месяца"
+      x_years:
+        few: "%{count} года"
+        many: "%{count} лет"
+        one: "%{count} год"
+        other: "%{count} года"
       x_seconds:
         few: "%{count} секунды"
         many: "%{count} секунд"
@@ -117,19 +134,6 @@ ru:
       month: Месяц
       second: Секунд
       year: Год
-  post:
-    title: 'Заголовок'
-    tag_list: 'Тэги (разделенные через запятую)'
-    body: 'Содержание'
-    my: 'Мои посты'
-    user: 'Автор'
-    created_at: 'Дата создания'
-    created: 'Запись успешно создана'
-    removed: 'Запись успешно удалена'
-    add: 'Добавить запись'
-    published: 'Опубликована'
-  comment:
-    body: 'Ваш комментарий'
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -150,7 +154,132 @@ ru:
       not_a_number: не является числом
       not_an_integer: не является целым числом
       odd: может иметь лишь четное значение
-      record_invalid: 'Возникли ошибки: %{errors}'
+      taken: уже существует
+      too_long:
+        few: слишком большой длины (не может быть больше чем %{count} символа)
+        many: слишком большой длины (не может быть больше чем %{count} символов)
+        one: слишком большой длины (не может быть больше чем %{count} символ)
+        other: слишком большой длины (не может быть больше чем %{count} символа)
+      too_short:
+        few: недостаточной длины (не может быть меньше %{count} символов)
+        many: недостаточной длины (не может быть меньше %{count} символов)
+        one: недостаточной длины (не может быть меньше %{count} символа)
+        other: недостаточной длины (не может быть меньше %{count} символа)
+      wrong_length:
+        few: неверной длины (может быть длиной ровно %{count} символа)
+        many: неверной длины (может быть длиной ровно %{count} символов)
+        one: неверной длины (может быть длиной ровно %{count} символ)
+        other: неверной длины (может быть длиной ровно %{count} символа)
+      other_than: должно отличаться от %{count}
+    template:
+      body: 'Проблемы возникли со следующими полями:'
+      header:
+        few: "%{model}: сохранение не удалось из-за %{count} ошибок"
+        many: "%{model}: сохранение не удалось из-за %{count} ошибок"
+        one: "%{model}: сохранение не удалось из-за %{count} ошибки"
+        other: "%{model}: сохранение не удалось из-за %{count} ошибки"
+  helpers:
+    select:
+      prompt: 'Выберите: '
+    submit:
+      create: Создать %{model}
+      submit: Сохранить %{model}
+      update: Сохранить %{model}
+  number:
+    currency:
+      format:
+        delimiter: " "
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: руб.
+    format:
+      delimiter: " "
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            few: миллиардов
+            many: миллиардов
+            one: миллиард
+            other: миллиардов
+          million:
+            few: миллионов
+            many: миллионов
+            one: миллион
+            other: миллионов
+          quadrillion:
+            few: квадриллионов
+            many: квадриллионов
+            one: квадриллион
+            other: квадриллионов
+          thousand:
+            few: тысяч
+            many: тысяч
+            one: тысяча
+            other: тысяч
+          trillion:
+            few: триллионов
+            many: триллионов
+            one: триллион
+            other: триллионов
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: false
+        strip_insignificant_zeros: false
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            few: байта
+            many: байт
+            one: байт
+            other: байта
+          gb: ГБ
+          kb: КБ
+          mb: МБ
+          tb: ТБ
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: " и "
+      two_words_connector: " и "
+      words_connector: ", "
+  time:
+    am: утра
+    formats:
+      default: "%a, %d %b %Y, %H:%M:%S %z"
+      long: "%d %B %Y, %H:%M"
+      short: "%d %b, %H:%M"
+    pm: вечера
+  post:
+    title: 'Заголовок'
+    tag_list: 'Тэги (разделенные через запятую)'
+    body: 'Содержание'
+    my: 'Мои посты'
+    user: 'Автор'
+    created_at: 'Дата создания'
+    created: 'Запись успешно создана'
+    removed: 'Запись успешно удалена'
+    add: 'Добавить запись'
+    published: 'Опубликована'
+  comment:
+    body: 'Ваш комментарий'
   will_paginate:
     previous_label: "&#8592; Назад"
     next_label: "Вперед &#8594;"
