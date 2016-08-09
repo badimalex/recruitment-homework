@@ -4,7 +4,6 @@ class Post < ActiveRecord::Base
   self.per_page = 5
 
   scope :latest, -> { order('created_at DESC') }
-  scope :by_user, ->(user) { where(user: user) if user }
   scope :published, -> { where(published: true) }
 
   belongs_to :user

@@ -38,24 +38,4 @@ RSpec.describe Post, type: :model do
       expect(Post.published).to_not include(@not_published)
     end
   end
-
-  describe '.by_user' do
-    before do
-      @user = create(:user)
-      @user_posts = create_list(:post, 2, user: @user)
-      @other_posts = create_list(:post, 2)
-    end
-
-    it 'should include user posts' do
-      expect(Post.by_user(@user)).to match_array(@user_posts)
-    end
-
-    it 'should not include other user posts' do
-      expect(Post.by_user(@user)).to_not match_array(@other_posts)
-    end
-  end
-
-  describe '.per_page' do
-    it { expect(Post.per_page).to eq 5 }
-  end
 end

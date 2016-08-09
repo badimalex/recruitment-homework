@@ -1,5 +1,5 @@
 class MyPostsController < ApplicationController
   def index
-    @posts = Post.by_user current_user
+    @posts = current_user.posts.latest
   end
 end
